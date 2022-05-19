@@ -109,6 +109,18 @@ const doubleMoney = () => {
 };
 //=================================================================
 
+//sortByRichest FUNCTIONALITY , SORT ARRAY METHOD
+//sort method takes in a callback function with 2 parameters a,b
+//we have to target the money preoperty from the object
+// invoke updateDOM in order to be able to see it hapening in the browser
+const sortByRichest = () => {
+  data.sort((a, b) => {
+    return b.money - a.money;
+  });
+  updateDOM();
+};
+//======================================================================
+
 //Example of fetching the data with  .then() method
 // const getRandomUser = () => {
 //   fetch("https://randomuser.me/api")
@@ -127,4 +139,7 @@ const doubleMoney = () => {
 addUserBtn.addEventListener("click", getRandomUser);
 //add the click event listeneer on doubleBtn and invoke the doubleMoney function which will double the money for each person
 doubleBtn.addEventListener("click", doubleMoney);
+//add the click event listeneer on sortBtn and invoke the sortByRichest function ,this will give us the richest persons in descending order
+sortBtn.addEventListener("click", sortByRichest);
+
 //======================================================================
