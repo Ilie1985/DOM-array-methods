@@ -10,7 +10,7 @@ const calculateWealthBtn = document.getElementById("calculate-wealth");
 let data = [];
 //====================================================================
 
-//FOR EACH METHOD
+//FOR EACH METHOD ====
 // updateDom FUNCTIONALITY
 //take in a parameter (providedData)
 //give the default value to the providedData parameter -->(data),which is saying that if nothing is passed in when weinvoke the function updateDom(?) then we`re going to use the default value -->(data)
@@ -73,6 +73,7 @@ const getRandomUser = async () => {
   //console.log(data);
 
   //we assign a variable user to the data fetched and to the first item from the results(results comes from the fetched data api)
+  //user is an object
   const user = data.results[0];
 
   //CREATE AN OBJECT CALLED newUser
@@ -91,8 +92,22 @@ const getRandomUser = async () => {
 getRandomUser();
 getRandomUser();
 getRandomUser();
-
 //=======================================================================================================
+
+//doubleMoney FUNCTIONALITY , MAP() ARRAY METHOD
+//we have the data array at the top and because we use let that means that we can reasign it
+//return an object
+//use spread operator so that we can have access to everything that we have inside person
+//invoke updateDOM because every time we invoke double money we need to update the DOM elements
+//take the money propert and give it a value using person(which is an object).money and we multiply it with 2  so that when we click the double money button we will double the money for each person
+//we can see the name aswell when we click double money btn because we`re using the spread operator
+const doubleMoney = () => {
+  data = data.map((person) => {
+    return { ...person, money: person.money * 2 };
+  });
+  updateDOM();
+};
+//=================================================================
 
 //Example of fetching the data with  .then() method
 // const getRandomUser = () => {
@@ -108,5 +123,8 @@ getRandomUser();
 //=========================================================================================================
 
 // EVENT LISTENERS
-//add the click event listeneer and invoke the getRandom user function which will add a random person on the list of persons
+//add the click event listeneer on addUserBtn and invoke the getRandom user function which will add a random person on the list of persons
 addUserBtn.addEventListener("click", getRandomUser);
+//add the click event listeneer on doubleBtn and invoke the doubleMoney function which will double the money for each person
+doubleBtn.addEventListener("click", doubleMoney);
+//======================================================================
