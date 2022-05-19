@@ -2,7 +2,7 @@
 const main = document.getElementById("main");
 const addUserBtn = document.getElementById("add-user");
 const doubleBtn = document.getElementById("double");
-const showBillionairesBtn = document.getElementById("show-millionaires");
+const showMillionairesBtn = document.getElementById("show-millionaires");
 const sortBtn = document.getElementById("sort");
 const calculateWealthBtn = document.getElementById("calculate-wealth");
 
@@ -121,6 +121,18 @@ const sortByRichest = () => {
 };
 //======================================================================
 
+//showMillionaire FUNCTIONALITY, FILTER ARRAY METHOD
+// take data array and reasign it to data.filter
+//take in an item param on the filter method
+//return the person(param).money greater than a million
+//invoke updateDOM in order to be able to see it hapening in the browser
+const showMillionaires = () => {
+  data = data.filter((person) => {
+    return person.money > 1000000;
+  });
+  updateDOM();
+};
+
 //Example of fetching the data with  .then() method
 // const getRandomUser = () => {
 //   fetch("https://randomuser.me/api")
@@ -141,5 +153,7 @@ addUserBtn.addEventListener("click", getRandomUser);
 doubleBtn.addEventListener("click", doubleMoney);
 //add the click event listeneer on sortBtn and invoke the sortByRichest function ,this will give us the richest persons in descending order
 sortBtn.addEventListener("click", sortByRichest);
+//add the click event listeneer on showMillionairesBtn and invoke the showMillionaires function ,this will give us only the millionaire persons
+showMillionairesBtn.addEventListener("click", showMillionaires);
 
 //======================================================================
