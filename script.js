@@ -10,22 +10,72 @@ const calculateWealthBtn = document.getElementById("calculate-wealth");
 let data = [];
 //====================================================================
 
-//Add new object to data array ,push method
-const addData = (obj) => {
-  data.push(obj)
-};
+//FOR EACH METHOD
+// updateDom FUNCTIONALITY
+//take in a parameter (providedData)
+//give the default value to the providedData parameter -->(data),which is saying that if nothing is passed in when weinvoke the function updateDom(?) then we`re going to use the default value -->(data)
+//clear the main div, set it to its default value
+//loop through the provided data parameter using the forEach method
+//forEach method takes in a callback function with a parameter(item)
+//we can add the index param in case we need the index of the item
+//we can access the entire array with the third parameter
+//we only need one parameter ,which is the item param
+//create a new element for every single person with the help of the document.createElement method
+// add the class (.person) on the new element created with the help of classList.add()
+//populate the new div element with the help of .innerHTML
+//to actualy be displayed in the browser we need to take the main element and with the help of appendChild() ,that child element is the (const element) that we just created, we can display it
+const updateDOM = (providedData = data) => {
+  main.innerHTML = "<h2><strong>Person</strong>Wealth</h2>";
+  providedData.forEach((item) => {
+    const element = document.createElement("div");
+    element.classList.add("person");
+    element.innerHTML = `<strong> ${item.name} </strong> ${formatMoney(
+      item.money
+    )}`;
+    main.appendChild(element);
+  });
+  //======================================================
 
-//Fetch random user and add money
+  //Example of a for loop ,which is similar to forEach
+  //we`re looping through the data
+  //in this case we`re getting every user name from the data/providedData
+  // for(i=0;i<providedData.length;i++){
+  //   providedData[i].name
+  //   console.log(providedData[i])
+
+  // }
+  //=====================================================
+};
+//==================================================================
+
+//FORMAT NUMBER DISPLAYED IN THE BROWSER TO LOOK LIKE MONEY FUNCTIONALITY
+//take in a number parameter
+//used the code from stackoverflow to transform the number into a currency string
+//use function to take in item.money from element.innerHTML /providedData.forEach() above
+//concatinate the pound sign to the amount of money
+const formatMoney = (number) => {
+  return "£" + number.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,");
+};
+//=====================================================================
+
+//ADD A NEW OBJECT TO DATA ARRAY WITH THE HELP OF THE PUSH METHOD
+const addData = (obj) => {
+  data.push(obj);
+  updateDOM();
+};
+//=========================================================================================
+
+//FETCH RANDOM USER AND ADD MONEY
 //Use async/await method instead of .then() method
 const getRandomUser = async () => {
   const res = await fetch("https://randomuser.me/api");
   const data = await res.json();
   //console.log(data);
 
-  //we assign a variable user to the data fetched and to the first item from the results(results comes from the fetched api)
+  //we assign a variable user to the data fetched and to the first item from the results(results comes from the fetched data api)
   const user = data.results[0];
 
-  //Create an object called newUser
+  //CREATE AN OBJECT CALLED newUser
   //take user, name object and first property of the object
   //take user, name object and last property of the object
   //to generate a random number up to 1 milion we use Math.floor wich rounds a number down ,Math.random which generates a random decimal, and we multiply it to 1 milion to have a random number that goes upe to 1 mil
@@ -41,6 +91,7 @@ const getRandomUser = async () => {
 getRandomUser();
 getRandomUser();
 getRandomUser();
+
 //=======================================================================================================
 
 //Example of fetching the data with  .then() method
@@ -55,3 +106,7 @@ getRandomUser();
 // };
 // getRandomUser();
 //=========================================================================================================
+
+// EVENT LISTENERS
+//add the click event listeneer and invoke the getRandom user function which will add a random person on the list of persons
+addUserBtn.addEventListener("click", getRandomUser);
