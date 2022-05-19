@@ -48,7 +48,7 @@ const updateDOM = (providedData = data) => {
 };
 //==================================================================
 
-//FORMAT NUMBER DISPLAYED IN THE BROWSER TO LOOK LIKE MONEY FUNCTIONALITY
+//FORMAT NUMBER DISPLAYED IN THE BROWSER,TO LOOK LIKE MONEY ,FUNCTIONALITY
 //take in a number parameter
 //used the code from stackoverflow to transform the number into a currency string
 //use function to take in item.money from element.innerHTML /providedData.forEach() above
@@ -132,6 +132,23 @@ const showMillionaires = () => {
   });
   updateDOM();
 };
+//==========================================================================
+
+//calculateWealth FUNCTIONALITY, REDUCE ARRAY METHOD
+const calculateWealth = () => {
+  // const wealth = data.reduce((acc, person) => {
+  //   return (acc += person.money), 0
+  // });
+  // console.log(wealth)
+
+  const wealth = data.reduce((acc, person) => (acc += person.money), 0);
+  const wealthEl = document.createElement("div");
+  wealthEl.innerHTML = `<h3>Total Wealth: <strong>${formatMoney(
+    wealth
+  )}</strong></h3>`;
+  main.appendChild(wealthEl);
+};
+//===================================================================
 
 //Example of fetching the data with  .then() method
 // const getRandomUser = () => {
@@ -155,5 +172,6 @@ doubleBtn.addEventListener("click", doubleMoney);
 sortBtn.addEventListener("click", sortByRichest);
 //add the click event listeneer on showMillionairesBtn and invoke the showMillionaires function ,this will give us only the millionaire persons
 showMillionairesBtn.addEventListener("click", showMillionaires);
-
+//add the click event listeneer on calculateWealthBtn and invoke the calculateWealth function ,this will give us the entire amount of money
+calculateWealthBtn.addEventListener("click", calculateWealth);
 //======================================================================
